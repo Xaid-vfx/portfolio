@@ -1,8 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: Centra;
   src: url(../assets/font/CentraNo2-Bold.ttf);
   font-weight: 700;
 }
+
 
 
 @font-face {
@@ -22,9 +27,6 @@
   min-width: 100px;
 
 }
-
-
-
 
 * {
   margin: 0;
@@ -293,17 +295,6 @@ p.danger {
   margin-left: 10vh;
 }
 
-
-.page {
-
-  
-  margin-top: 20vh;
-  margin-inline: 14vh;
-  height: 100%;
-  color: white;
-  padding-inline: 20px;
-}
-
 @font-face {
   font-family: 'La Belle Aurore';
   src: url(../assets/font/LaBelleAurore.woff2);
@@ -423,7 +414,7 @@ p {
 
 
 .svg {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -437,6 +428,7 @@ p {
 }
 
 .text-copy {
+  opacity: 0;
   fill: none;
   stroke: white;
   stroke-dasharray: 6% 29%;
@@ -542,4 +534,22 @@ p {
 .omae.show{
   opacity: 1;
   transform: translateY(0);
+}
+
+
+
+.desctrans{
+  height: 100%;
+  border: 0px solid;
+  transition: all .8s;
+  background-color: rgba(0, 0, 0, 0.9);
+  top:0;
+  width: 0;
+}
+.wrapperCard{
+  border: 0px solid;
+}
+
+.git:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
 }

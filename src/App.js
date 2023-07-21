@@ -5,12 +5,15 @@ import About from './components/About';
 import './components/index.css'
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Projects from './components/Projects'
-import { useEffect, useRef } from 'react';
+import Projects from './components/Projects/Projects'
+import { useEffect, useRef, useState } from 'react';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
-
-
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import ParticleBack from './components/Particle';
+import Experience from './components/Experience/Experience';
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import OpenSource from './Pages/OpenSource';
 
 function App() {
 
@@ -19,9 +22,16 @@ function App() {
   const ref2 = useRef(null);
   const ref3 = useRef(null);
 
+  const [scroll, setscroll] = useState()
+  window.onscroll = function (e) {
+    console.log(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100); // Value of scroll Y in px
+    console.log();
+  };
+
+
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
-    
+
   };
 
   const handleClick2 = () => {
@@ -45,8 +55,7 @@ function App() {
 
       })
 
-    }, { threshold: .5 })
-
+    }, { threshold: .8 })
 
     const boxElList = document.querySelectorAll('.projectx');
     boxElList.forEach((el) => {
@@ -61,7 +70,7 @@ function App() {
       observer.observe(el);
     })
 
-    const about = document.querySelectorAll('.indet p');
+    let about = document.querySelectorAll('.indet p');
     about.forEach((el) => {
       observer.observe(el);
     })
@@ -92,43 +101,41 @@ function App() {
 
   return (
     <div className='App'>
-      <Navbar handle={handleClick} handle1={handleClick2} handle3={handleClick3} handle4={handleClick4}/>
 
-      <div className='page'>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+            <div className='page text-white'>
+              <ParticleBack />
+              <div className='wrapper'>
 
+                <div className='wrappersub'>
+                  <Home />
+                </div>
 
-        <div className='hhh' >
-          <div className='homecomp' ref={ref}>
-            <span className='tags top-tags'></span>
-            <Home  />
-            <span className='tags bottom-tags'></span>
-          </div>
-        </div>
+                <div className='wrappersub2'>
+                  <About />
+                </div>
 
-        <br />
-        <div>
-          <About />
+                {/* <div className='wrappersub3 h-[110vh]'>
+              <Skills />
+            </div> */}
 
+                <div className='wrappersub3'>
+                  <Projects />
+                </div>
 
-        </div>
-
-        <div ref={ref1}>
-          <Skills />
-        </div>
-
-        <div ref={ref2}>
-
-          <Projects />
-        </div>
-
-
-
-
-
-
-
-        <div ref={ref3}><Contact /></div>
-      </div>
+                <div className='wrappersub3'>
+                  <Experience />
+                </div>
+                <div ref={ref3} className=''><Contact /></div>
+              </div>
+            </div>
+          } />
+          <Route path='/open-source' element={<div>
+            <OpenSource/>
+          </div>}/>
+        </Routes></BrowserRouter>
 
     </div>
   );
